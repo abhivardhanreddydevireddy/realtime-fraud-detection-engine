@@ -161,9 +161,9 @@ export default function Overview() {
       window.setInterval(
         () => {
           void loadModelData();
-        },
-        5000
+        30000
       );
+
 
 
     return () =>

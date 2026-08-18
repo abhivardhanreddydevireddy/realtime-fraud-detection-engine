@@ -57,18 +57,23 @@ def overview():
     return ml_service.get_overview()
 
 
-# =========================================================
-# MODEL METRICS
-# =========================================================
+_METRICS_CACHE = {}
 
 @router.get("/metrics")
 def metrics(
     threshold: float | None = None,
 ):
+    if threshold is None:
+        threshold = ml_service.FRAUD_THRESHOLD
+
+    threshold_key = round(float(threshold), 4)
+    if threshold_key in _METRICS_CACHE:
+        return _METRICS_CACHE[threshold_key]
 
     # -----------------------------------------------------
     # CHECK MODEL
     # -----------------------------------------------------
+
 
     if (
         ml_service.model is None
@@ -336,7 +341,8 @@ def metrics(
         # RETURN RESPONSE
         # -------------------------------------------------
 
-        return {
+        res = {
+
 
             "accuracy": round(
                 float(accuracy * 100),
@@ -414,7 +420,11 @@ def metrics(
             ),
         }
 
+        _METRICS_CACHE[threshold_key] = res
+        return res
+
     except HTTPException:
+
 
         raise
 
