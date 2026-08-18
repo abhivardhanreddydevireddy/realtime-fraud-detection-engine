@@ -59,7 +59,9 @@ const getLatency = (tx) => {
 
 export default function Investigation() {
   const {
-    items,
+    items = [],
+    streamHistory = [],
+    streamCount,
     running,
   } = useStream();
 
@@ -78,21 +80,18 @@ export default function Investigation() {
 
   // =========================================================
   // TRANSACTIONS
-  //
-  // items already contains maximum 243.
-  //
-  // We do NOT slice to 243 here.
-  // If items has 1 -> display 1.
-  // If items has 13 -> display 13.
   // =========================================================
 
   const transactions = useMemo(() => {
-    if (!Array.isArray(items)) {
+    const list = streamHistory.length > 0 ? streamHistory : items;
+
+    if (!Array.isArray(list)) {
       return [];
     }
 
-    return [...items].reverse();
-  }, [items]);
+    return [...list].reverse();
+  }, [items, streamHistory]);
+
 
   // =========================================================
   // FILTERED TRANSACTIONS
@@ -221,7 +220,8 @@ export default function Investigation() {
   // =========================================================
 
   const total =
-    transactions.length;
+    streamCount > 0 ? streamCount : transactions.length;
+
 
   const high =
     transactions.filter(
