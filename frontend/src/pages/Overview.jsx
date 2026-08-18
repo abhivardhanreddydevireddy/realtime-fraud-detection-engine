@@ -157,12 +157,10 @@ export default function Overview() {
     void loadModelData();
 
 
-    const timer =
-      window.setInterval(
-        () => {
-          void loadModelData();
-        30000
-      );
+    const timer = window.setInterval(() => {
+      void loadModelData();
+    }, 30000);
+
 
 
 
