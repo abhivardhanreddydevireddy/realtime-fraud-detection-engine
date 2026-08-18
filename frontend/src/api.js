@@ -2,7 +2,10 @@
 // FRAUDGUARD API
 // =========================================================
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api";
+const cleanBaseUrl = rawBaseUrl.replace(/\/$/, "");
+const API_BASE_URL = cleanBaseUrl.endsWith("/api") ? cleanBaseUrl : `${cleanBaseUrl}/api`;
+
 
 
 // =========================================================
