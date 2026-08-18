@@ -17,8 +17,9 @@ import {
 } from "lucide-react";
 
 import { useStream } from "../content/StreamContext";
-import "../styles/Investigation.css";
+import "../styles/investigation.css";
 import StatusBadge from "../components/StatusBadge";
+
 import MetricCard from "../components/MetricCard";
 
 // =========================================================
