@@ -305,6 +305,8 @@ export default function Analytics() {
 
   const {
     items = [],
+    streamHistory = [],
+    streamCount,
     running,
   } = useStream();
 
@@ -314,18 +316,19 @@ export default function Analytics() {
   // ===================================================
 
   const transactions = useMemo(() => {
+    const list = streamHistory.length > 0 ? streamHistory : items;
 
-    if (!Array.isArray(items)) {
+    if (!Array.isArray(list)) {
       return [];
     }
 
-    return items.filter(
+    return list.filter(
       (item) =>
         item &&
         typeof item === "object"
     );
 
-  }, [items]);
+  }, [items, streamHistory]);
 
 
   // ===================================================
@@ -333,7 +336,8 @@ export default function Analytics() {
   // ===================================================
 
   const streamedCount =
-    transactions.length;
+    streamCount > 0 ? streamCount : transactions.length;
+
 
 
   const fraudCount = useMemo(() => {

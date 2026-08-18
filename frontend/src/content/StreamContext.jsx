@@ -11,10 +11,9 @@ import { api } from "../api";
 
 const StreamContext = createContext(null);
 
-// Maximum number of transactions kept in frontend memory.
-// This is ONLY a limit.
-// It does NOT mean we always display 243.
-const MAX_STREAM_TRANSACTIONS = 243;
+// Maximum number of transactions kept in frontend memory buffer for live streaming.
+const MAX_STREAM_TRANSACTIONS = 10000;
+
 
 export function StreamProvider({ children }) {
   // Latest live transactions
