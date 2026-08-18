@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.venv-compat/
+venv/
+ENV/
+.pytest_cache/
+*.log
+
+# Node & Frontend
+node_modules/
+dist/
+.vite/
+frontend old/
+
+# Environment & IDE
+.env
+.vscode/
+.idea/
+.DS_Store

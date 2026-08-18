@@ -1,0 +1,978 @@
+/* =========================================================
+   INVESTIGATION SEARCH
+========================================================= */
+
+.investigation-search-panel {
+  padding: 24px;
+  margin-bottom: 18px;
+}
+
+.investigation-search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.investigation-search-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+.investigation-search-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.investigation-search-header > svg {
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   SEARCH ROW
+========================================================= */
+
+.transaction-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.transaction-search-input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 14px;
+  gap: 10px;
+}
+
+.transaction-search-input svg {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.transaction-search-input input {
+  width: 100%;
+  min-width: 0;
+
+  border: none;
+  outline: none;
+
+  font-size: 14px;
+  color: #0f172a;
+
+  background: transparent;
+}
+
+.transaction-search-input input::placeholder {
+  color: #94a3b8;
+}
+
+.transaction-search-input:focus-within {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(37, 99, 235, 0.08);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.investigate-button {
+  height: 46px;
+
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+  color: white;
+
+  font-weight: 700;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.investigate-button:hover {
+  background: #1d4ed8;
+}
+
+.investigate-button:active {
+  transform: translateY(1px);
+}
+
+.clear-button {
+  height: 46px;
+
+  padding: 0 18px;
+
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+
+  background: white;
+  color: #475569;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.clear-button:hover {
+  background: #f8fafc;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.investigation-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 16px;
+}
+
+.filter-btn {
+  border: 1px solid #dbe3ef;
+
+  background: white;
+
+  padding: 7px 14px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #475569;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.filter-btn:hover {
+  background: #f8fafc;
+}
+
+.filter-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+/* =========================================================
+   TRANSACTION BROWSER
+========================================================= */
+
+.transaction-browser {
+  padding: 24px;
+  margin-bottom: 18px;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   TRANSACTION COUNT
+========================================================= */
+
+.transaction-count {
+  flex-shrink: 0;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  padding: 6px 11px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TRANSACTION GRID
+========================================================= */
+
+/*
+   IMPORTANT
+
+   This is the main fix.
+
+   Desktop:
+   3 cards per row
+
+   Medium:
+   2 cards per row
+
+   Mobile:
+   1 card per row
+
+   The number of cards is dynamic.
+   We do NOT create 243 empty cards.
+*/
+
+.transaction-list {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 18px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TRANSACTION CARD
+========================================================= */
+
+.transaction-item {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  padding: 16px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.transaction-item:hover {
+  border-color: #93c5fd;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 15px
+    rgba(15, 23, 42, 0.06);
+}
+
+.transaction-item.selected {
+  border-color: #2563eb;
+
+  background: #eff6ff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(37, 99, 235, 0.08);
+}
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.transaction-item-top {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+}
+
+.transaction-item-top strong {
+  min-width: 0;
+
+  flex: 1;
+
+  font-size: 14px;
+
+  color: #0f172a;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   CARD MIDDLE
+========================================================= */
+
+.transaction-item-middle {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  padding: 12px 0;
+
+  border-top: 1px solid #eef2f7;
+
+  border-bottom: 1px solid #eef2f7;
+}
+
+.transaction-value {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.transaction-value span {
+  font-size: 10px;
+
+  color: #64748b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+}
+
+.transaction-value strong {
+  min-width: 0;
+
+  font-size: 15px;
+
+  color: #0f172a;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.transaction-value.probability strong {
+  color: #dc2626;
+}
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.transaction-item-bottom {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  font-size: 12px;
+
+  color: #64748b;
+}
+
+.merchant-name {
+  min-width: 0;
+
+  flex: 1;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.view-label {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: #2563eb;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   EMPTY LIST
+========================================================= */
+
+.empty-list {
+  grid-column: 1 / -1;
+
+  min-height: 160px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 12px;
+
+  color: #64748b;
+
+  background: #f8fafc;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   INVESTIGATION DETAIL
+========================================================= */
+
+.investigation-detail {
+  padding: 26px;
+
+  overflow: hidden;
+}
+
+.investigation-detail-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.detail-label {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  margin-bottom: 5px;
+}
+
+.investigation-detail-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+
+  color: #0f172a;
+
+  word-break: break-word;
+}
+
+/* =========================================================
+   RISK SCORE
+========================================================= */
+
+.risk-score-card {
+  margin-top: 20px;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+}
+
+.risk-score-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.risk-score-header > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.risk-score-header span:first-child {
+  color: #64748b;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+}
+
+.risk-score-header strong {
+  font-size: 28px;
+
+  color: #0f172a;
+}
+
+.risk-label {
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.risk-label.low {
+  color: #15803d;
+
+  background: #dcfce7;
+}
+
+.risk-label.medium {
+  color: #c2410c;
+
+  background: #ffedd5;
+}
+
+.risk-label.high {
+  color: #dc2626;
+
+  background: #fee2e2;
+}
+
+.risk-progress {
+  width: 100%;
+
+  height: 8px;
+
+  margin-top: 16px;
+
+  background: #e2e8f0;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.risk-progress-bar {
+  height: 100%;
+
+  border-radius: 20px;
+
+  transition: width 0.3s ease;
+}
+
+.risk-progress-bar.low {
+  background: #16a34a;
+}
+
+.risk-progress-bar.medium {
+  background: #f59e0b;
+}
+
+.risk-progress-bar.high {
+  background: #dc2626;
+}
+
+.risk-score-card p {
+  margin: 14px 0 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   DETAIL SECTION
+========================================================= */
+
+.detail-section {
+  margin-top: 24px;
+}
+
+.detail-section h3 {
+  margin: 0 0 14px;
+
+  font-size: 16px;
+}
+
+.detail-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.detail-box {
+  min-width: 0;
+
+  padding: 15px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 10px;
+
+  background: white;
+}
+
+.detail-box span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  margin-bottom: 7px;
+}
+
+.detail-box strong {
+  display: block;
+
+  color: #0f172a;
+
+  font-size: 15px;
+
+  word-break: break-word;
+}
+
+.risk-text.low {
+  color: #15803d;
+}
+
+.risk-text.medium {
+  color: #c2410c;
+}
+
+.risk-text.high {
+  color: #dc2626;
+}
+
+/* =========================================================
+   MODEL ASSESSMENT
+========================================================= */
+
+.investigation-note {
+  display: flex;
+
+  gap: 14px;
+
+  margin-top: 20px;
+
+  padding: 17px;
+
+  border-radius: 12px;
+
+  background: #eff6ff;
+
+  border: 1px solid #bfdbfe;
+}
+
+.note-icon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: white;
+
+  color: #2563eb;
+}
+
+.investigation-note strong {
+  color: #0f172a;
+}
+
+.investigation-note p {
+  margin: 6px 0 0;
+
+  color: #475569;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   EMPTY / PLACEHOLDER
+========================================================= */
+
+.empty-investigation {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+
+  color: #64748b;
+}
+
+.empty-investigation h2 {
+  margin: 14px 0 5px;
+
+  color: #0f172a;
+}
+
+.empty-investigation p {
+  margin: 0;
+
+  max-width: 500px;
+
+  line-height: 1.6;
+}
+
+.investigation-placeholder {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.placeholder-icon {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  margin-bottom: 16px;
+}
+
+.investigation-placeholder h2 {
+  margin: 0;
+
+  color: #0f172a;
+}
+
+.investigation-placeholder p {
+  max-width: 500px;
+
+  color: #64748b;
+
+  line-height: 1.6;
+}
+
+.placeholder-example {
+  margin-top: 8px;
+
+  padding: 9px 14px;
+
+  border-radius: 8px;
+
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.placeholder-example strong {
+  margin-left: 6px;
+
+  color: #2563eb;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+/* Large desktop */
+@media (min-width: 1400px) {
+  .transaction-list {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Desktop / laptop */
+@media (min-width: 1001px) and (max-width: 1399px) {
+  .transaction-list {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .transaction-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Small tablet */
+@media (max-width: 800px) {
+  .transaction-search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .investigate-button,
+  .clear-button {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .investigation-search-panel,
+  .transaction-browser,
+  .investigation-detail {
+    padding: 18px;
+  }
+
+  .transaction-list {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .investigation-detail-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .risk-score-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .transaction-item-middle {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 450px) {
+  .transaction-item {
+    padding: 13px;
+  }
+
+  .transaction-item-top strong {
+    font-size: 13px;
+  }
+
+  .transaction-value strong {
+    font-size: 14px;
+  }
+
+  .transaction-item-bottom {
+    font-size: 11px;
+  }
+}
