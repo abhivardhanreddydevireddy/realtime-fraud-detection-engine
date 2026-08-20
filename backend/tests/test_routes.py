@@ -96,7 +96,7 @@ def test_thresholds_endpoints(client):
     assert updated["thresholds"]["review_threshold"] == 0.45
 
     # Revert back to default
-    client.post("/api/thresholds", json={"fraud_threshold": 0.85, "review_threshold": 0.50})
+    client.post("/api/thresholds", json={"fraud_threshold": 0.9229, "review_threshold": 0.50})
 
 
 def test_high_risk_accounts_endpoint(client):

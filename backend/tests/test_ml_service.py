@@ -52,7 +52,7 @@ def test_threshold_tuning_configuration(service):
     assert service.REVIEW_THRESHOLD == 0.40
 
     # Reset back to default
-    service.update_thresholds(0.85, 0.50)
+    service.update_thresholds(0.9229, 0.50)
 
 
 def test_high_risk_account_flagging(service):

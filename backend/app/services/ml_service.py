@@ -22,13 +22,14 @@ class MLService:
         # FRAUD DECISION THRESHOLDS
         # =====================================================
 
-        # Probability >= 0.50 -> HIGH / FRAUD ALERT
-        # Probability >= 0.25 -> MEDIUM / REVIEW
-        # Probability < 0.25  -> LOW / APPROVE
+        # Optimal F1-maximized threshold from model training: ~0.9229
+        # Probability >= 0.9229 -> HIGH / FRAUD ALERT
+        # Probability >= 0.50   -> MEDIUM / REVIEW
+        # Probability < 0.50    -> LOW / APPROVE
 
-        self.FRAUD_THRESHOLD = 0.50
+        self.FRAUD_THRESHOLD = 0.9229
 
-        self.REVIEW_THRESHOLD = 0.25
+        self.REVIEW_THRESHOLD = 0.50
 
         # =====================================================
         # PROJECT PATHS
